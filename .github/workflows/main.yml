@@ -1,0 +1,45 @@
+
+name: Build Fabric Mod
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: temurin
+
+      - name: Compilar mod
+        run: |
+          if [ -f "./gradlew" ]; then
+            chmod +x ./gradlew
+            ./gradlew build
+          elif [ -f "./catalogmenu-fabric-1.21.1/gradlew" ]; then
+            cd catalogmenu-fabric-1.21.1
+            chmod +x ./gradlew
+            ./gradlew build
+          else
+            echo "No se encontro gradlew"
+            exit 1
+          fi
+
+      - name: Guardar archivo JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalogmenu-fabric-1.21.1
+          path: |
+            **/build/libs/*.jar
+          if-no-files-found: error
