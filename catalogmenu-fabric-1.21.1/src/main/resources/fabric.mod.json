@@ -1,0 +1,23 @@
+{
+	"schemaVersion": 1,
+	"id": "catalogmenu",
+	"version": "${version}",
+	"name": "Catalog Menu",
+	"description": "Pulsa H para abrir un menu de catalogo con diseno futurista. Solo visual, sin funciones.",
+	"authors": [
+		"Tu nombre"
+	],
+	"license": "CC0-1.0",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.example.catalogmenu.CatalogMenuClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.16.0",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
